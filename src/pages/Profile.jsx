@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Calendar, Award, TrendingUp, CheckCircle, Clock } from 'lucide-react';
+import { Calendar, Trophy } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import IssueCard from '../components/IssueCard';
-import { STATUS_CONFIG, CATEGORIES } from '../utils/helpers';
+import { CATEGORIES } from '../utils/helpers';
+
+function getCitizenRank(resolved) {
+  if (resolved === 0) return { label: 'Newcomer', icon: '🌱', color: '#6b7280' };
+  if (resolved <= 2) return { label: 'Active Citizen', icon: '⭐', color: '#f59e0b' };
+  if (resolved <= 5) return { label: 'Community Hero', icon: '🔥', color: '#f97316' };
+  return { label: 'City Champion', icon: '👑', color: '#ff6b35' };
+}
 
 export default function Profile() {
   const { user, issues } = useApp();
@@ -11,6 +18,8 @@ export default function Profile() {
   const myIssues = issues.filter(i => i.reportedBy === user.id);
   const resolved = myIssues.filter(i => i.status === 'resolved').length;
   const inProgress = myIssues.filter(i => i.status === 'in-progress').length;
+  const totalUpvotes = myIssues.reduce((sum, i) => sum + (i.upvotes || 0), 0);
+  const rank = getCitizenRank(resolved);
 
   const catCounts = CATEGORIES.map(c => ({
     ...c, count: myIssues.filter(i => i.category === c.id).length
@@ -40,15 +49,35 @@ export default function Profile() {
               </div>
             </div>
 
-            {/* Stats */}
+            {/* Impact + Rank */}
             <div className="card p-5">
-              <h3 className="font-display font-bold text-base text-navy-900 mb-4">Your Impact</h3>
+              <div className="flex items-center gap-2 mb-4">
+                <Trophy size={16} className="text-flame-500" />
+                <h3 className="font-display font-bold text-base text-navy-900">Impact</h3>
+              </div>
+
+              {/* Citizen Rank */}
+              <div className="mb-4 p-4 rounded-2xl border-2 text-center"
+                style={{ borderColor: rank.color + '40', backgroundColor: rank.color + '0D' }}>
+                <div className="text-3xl mb-1">{rank.icon}</div>
+                <p className="font-display font-extrabold text-base" style={{ color: rank.color }}>{rank.label}</p>
+                <p className="text-xs text-gray-400 font-body mt-0.5">
+                  {resolved === 0
+                    ? 'Report your first issue to rank up'
+                    : resolved <= 2
+                    ? `${3 - resolved} more resolved to reach Community Hero`
+                    : resolved <= 5
+                    ? `${6 - resolved} more resolved to reach City Champion`
+                    : 'Top-tier civic contributor!'}
+                </p>
+              </div>
+
               <div className="space-y-3">
                 {[
                   { label: 'Issues Reported', value: myIssues.length, icon: '📋', color: '#ff6b35' },
                   { label: 'Resolved', value: resolved, icon: '✅', color: '#22c55e' },
                   { label: 'In Progress', value: inProgress, icon: '🔧', color: '#3b82f6' },
-                  { label: 'Total Upvotes', value: myIssues.reduce((sum, i) => sum + i.upvotes, 0), icon: '⬆️', color: '#8b5cf6' },
+                  { label: 'Total Upvotes', value: totalUpvotes, icon: '⬆️', color: '#8b5cf6' },
                 ].map(s => (
                   <div key={s.label} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">

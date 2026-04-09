@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider, useApp } from './context/AppContext';
 import Navbar from './components/Navbar';
 import Toast from './components/Toast';
+import AIChatbot from './components/AIChatbot';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -11,6 +12,7 @@ import IssueDetail from './pages/IssueDetail';
 import AdminDashboard from './pages/AdminDashboard';
 import Profile from './pages/Profile';
 import Notifications from './pages/Notifications';
+import LetterGenerator from './pages/LetterGenerator';
 
 function ProtectedRoute({ children }) {
   const { user } = useApp();
@@ -35,10 +37,12 @@ function AppContent() {
             <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+            <Route path="/generate-letter" element={<LetterGenerator />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
         <Toast />
+        <AIChatbot />
       </div>
     </BrowserRouter>
   );

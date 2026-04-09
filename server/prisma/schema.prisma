@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         String    @default("CITIZEN")
+  createdAt    DateTime  @default(now())
+
+  issues       Issue[]
+  votes        Vote[]
+  comments     Comment[]
+  statusChanges StatusHistory[]
+}
+
+model Issue {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  category    String
+  status      String    @default("OPEN")
+  photos      String    @default("[]")
+  latitude    Float
+  longitude   Float
+  address     String
+  authorId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  author      User      @relation(fields: [authorId], references: [id])
+  votes       Vote[]
+  comments    Comment[]
+  timeline    StatusHistory[]
+
+  @@index([category])
+  @@index([status])
+  @@index([createdAt])
+  @@index([authorId])
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  issueId   String
+  userId    String
+  createdAt DateTime @default(now())
+
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([issueId, userId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  body      String
+  issueId   String
+  authorId  String
+  createdAt DateTime @default(now())
+
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+model StatusHistory {
+  id        String   @id @default(cuid())
+  issueId   String
+  status    String
+  note      String?
+  changedBy String
+  createdAt DateTime @default(now())
+
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [changedBy], references: [id])
+}

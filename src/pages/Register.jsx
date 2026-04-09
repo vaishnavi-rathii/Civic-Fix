@@ -39,92 +39,90 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left panel */}
-      <div className="hidden lg:flex flex-col justify-between w-1/2 bg-navy-900 p-12 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5"
-          style={{ backgroundImage: 'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)', backgroundSize: '20px 20px' }} />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-flame-500/20 rounded-full blur-3xl" />
+    <div className="min-h-screen bg-navy-900 flex items-center justify-center px-4 py-12">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-flame-500/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-flame-500/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.03]"
+          style={{ backgroundImage: 'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)', backgroundSize: '24px 24px' }} />
+      </div>
 
-        <Link to="/" className="relative flex items-center gap-2">
-          <div className="w-9 h-9 bg-flame-500 rounded-xl flex items-center justify-center shadow-lg">
-            <span className="text-white font-display font-extrabold">CF</span>
-          </div>
-          <span className="font-display font-bold text-xl text-white">CivicFix</span>
-        </Link>
+      <div className="relative w-full max-w-md page-enter">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <Link to="/" className="inline-flex items-center gap-3 group">
+            <div className="w-12 h-12 bg-flame-500 rounded-2xl flex items-center justify-center shadow-lg shadow-flame-500/30 group-hover:scale-105 transition-transform">
+              <span className="text-white font-display font-extrabold text-lg">CF</span>
+            </div>
+            <span className="font-display font-extrabold text-2xl text-white">CivicFix</span>
+          </Link>
+          <p className="text-white/40 font-body text-sm mt-3">Create your citizen account</p>
+        </div>
 
-        <div className="relative">
-          <h2 className="font-display font-extrabold text-4xl text-white mb-4">
-            Be the change<br />you want to see.
-          </h2>
-          <p className="text-white/60 font-body leading-relaxed mb-8">
-            Every issue you report brings your community one step closer to being better.
-          </p>
-          <div className="space-y-3">
-            {['Free to use, always', 'Real-time status updates', 'Direct line to authorities', 'Community-powered'].map(item => (
-              <div key={item} className="flex items-center gap-3">
-                <CheckCircle size={16} className="text-green-400 flex-shrink-0" />
-                <span className="text-white/70 font-body text-sm">{item}</span>
-              </div>
-            ))}
+        {/* Role badge */}
+        <div className="flex justify-center mb-6">
+          <div className="flex items-center gap-2 px-4 py-2 bg-flame-500/10 border border-flame-500/20 rounded-xl">
+            <User size={14} className="text-flame-400" />
+            <span className="text-sm font-display font-semibold text-flame-400">Citizen Account</span>
           </div>
         </div>
 
-        <p className="relative text-white/30 text-xs font-body">© 2025 CivicFix</p>
-      </div>
-
-      {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center p-6 md:p-12 bg-gray-50">
-        <div className="w-full max-w-md page-enter">
-          <div className="mb-8">
-            <Link to="/" className="lg:hidden flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-flame-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-display font-extrabold text-sm">CF</span>
-              </div>
-              <span className="font-display font-bold text-lg text-navy-900">CivicFix</span>
-            </Link>
-            <h1 className="font-display font-extrabold text-3xl text-navy-900">Create account</h1>
-            <p className="text-gray-500 font-body mt-1">Join the civic movement today</p>
-          </div>
-
+        {/* Card */}
+        <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-                <AlertCircle size={16} className="text-red-500 flex-shrink-0" />
-                <span className="text-sm text-red-700 font-body">{error}</span>
+              <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+                <AlertCircle size={16} className="text-red-400 flex-shrink-0" />
+                <span className="text-sm text-red-300 font-body">{error}</span>
               </div>
             )}
 
             <div>
-              <label className="label">Full name</label>
+              <label className="block text-xs font-display font-semibold text-white/60 uppercase tracking-wider mb-1.5">Full name</label>
               <div className="relative">
-                <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input type="text" required value={form.name}
+                <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30" />
+                <input
+                  type="text"
+                  required
+                  value={form.name}
                   onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                  className="input-field pl-10" placeholder="Priya Sharma" />
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-white/20 font-body text-sm focus:outline-none focus:border-flame-500/60 transition-all"
+                  placeholder="Priya Sharma"
+                />
               </div>
             </div>
 
             <div>
-              <label className="label">Email address</label>
+              <label className="block text-xs font-display font-semibold text-white/60 uppercase tracking-wider mb-1.5">Email address</label>
               <div className="relative">
-                <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input type="email" required value={form.email}
+                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30" />
+                <input
+                  type="email"
+                  required
+                  value={form.email}
                   onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
-                  className="input-field pl-10" placeholder="you@example.com" />
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-white/20 font-body text-sm focus:outline-none focus:border-flame-500/60 transition-all"
+                  placeholder="you@example.com"
+                />
               </div>
             </div>
 
             <div>
-              <label className="label">Password</label>
+              <label className="block text-xs font-display font-semibold text-white/60 uppercase tracking-wider mb-1.5">Password</label>
               <div className="relative">
-                <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input type={showPass ? 'text' : 'password'} required value={form.password}
+                <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30" />
+                <input
+                  type={showPass ? 'text' : 'password'}
+                  required
+                  value={form.password}
                   onChange={e => setForm(p => ({ ...p, password: e.target.value }))}
-                  className="input-field pl-10 pr-10" placeholder="Min. 6 characters" />
+                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-10 py-3 text-white placeholder-white/20 font-body text-sm focus:outline-none focus:border-flame-500/60 transition-all"
+                  placeholder="Min. 6 characters"
+                />
                 <button type="button" onClick={() => setShowPass(!showPass)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                  {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors">
+                  {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
               {form.password && (
@@ -132,7 +130,7 @@ export default function Register() {
                   <div className="flex gap-1 mb-1">
                     {[1,2,3,4,5].map(i => (
                       <div key={i} className="h-1 flex-1 rounded-full transition-all duration-300"
-                        style={{ backgroundColor: i <= pw ? strengthColor[pw] : '#e5e7eb' }} />
+                        style={{ backgroundColor: i <= pw ? strengthColor[pw] : 'rgba(255,255,255,0.1)' }} />
                     ))}
                   </div>
                   <span className="text-xs font-semibold" style={{ color: strengthColor[pw] }}>{strengthLabel[pw]}</span>
@@ -141,36 +139,43 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="label">Confirm password</label>
+              <label className="block text-xs font-display font-semibold text-white/60 uppercase tracking-wider mb-1.5">Confirm password</label>
               <div className="relative">
-                <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input type="password" required value={form.confirm}
+                <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30" />
+                <input
+                  type="password"
+                  required
+                  value={form.confirm}
                   onChange={e => setForm(p => ({ ...p, confirm: e.target.value }))}
-                  className={`input-field pl-10 ${form.confirm && form.confirm !== form.password ? 'border-red-300' : ''}`}
-                  placeholder="••••••••" />
+                  className={`w-full bg-white/5 border rounded-xl pl-10 pr-10 py-3 text-white placeholder-white/20 font-body text-sm focus:outline-none focus:border-flame-500/60 transition-all
+                    ${form.confirm && form.confirm !== form.password ? 'border-red-500/40' : 'border-white/10'}`}
+                  placeholder="••••••••"
+                />
                 {form.confirm && form.confirm === form.password && (
-                  <CheckCircle size={16} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-green-500" />
+                  <CheckCircle size={15} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-green-400" />
                 )}
               </div>
             </div>
 
-            <button type="submit" disabled={loading}
-              className="w-full btn-primary flex items-center justify-center gap-2 text-sm font-semibold mt-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-flame-500 hover:bg-flame-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-display font-bold py-3.5 rounded-xl transition-all hover:-translate-y-0.5 shadow-lg shadow-flame-500/25 flex items-center justify-center gap-2 mt-2">
               {loading ? (
                 <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Creating account...</>
-              ) : 'Create Account'}
+              ) : 'Create Citizen Account'}
             </button>
 
-            <p className="text-center text-xs text-gray-400 font-body">
+            <p className="text-center text-xs text-white/20 font-body">
               By signing up, you agree to our Terms of Service and Privacy Policy.
             </p>
           </form>
-
-          <p className="text-center text-sm text-gray-500 font-body mt-6">
-            Already have an account?{' '}
-            <Link to="/login" className="text-flame-500 font-display font-semibold hover:underline">Sign in</Link>
-          </p>
         </div>
+
+        <p className="text-center text-sm text-white/40 font-body mt-5">
+          Already have an account?{' '}
+          <Link to="/login" className="text-flame-400 font-display font-semibold hover:text-flame-300 transition-colors">Sign in</Link>
+        </p>
       </div>
     </div>
   );

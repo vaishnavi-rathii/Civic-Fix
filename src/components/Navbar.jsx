@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Bell, Menu, X, Plus, LayoutDashboard, MapPin, User, LogOut, ChevronDown } from 'lucide-react';
+import { Bell, Menu, X, Plus, LayoutDashboard, MapPin, User, LogOut, ChevronDown, FileText } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export default function Navbar() {
@@ -14,6 +14,7 @@ export default function Navbar() {
 
   const navLinks = [
     { to: '/feed', label: 'Public Feed', icon: <MapPin size={16} /> },
+    { to: '/generate-letter', label: 'Write Letter', icon: <FileText size={16} /> },
     ...(user?.role === 'admin' ? [{ to: '/admin', label: 'Dashboard', icon: <LayoutDashboard size={16} /> }] : []),
   ];
 
@@ -122,6 +123,9 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex items-center gap-2">
+                <Link to="/generate-letter" className="hidden sm:flex items-center gap-1.5 text-sm font-display font-semibold text-gray-600 hover:text-navy-900 px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors">
+                  <FileText size={15} />📝 Write Letter
+                </Link>
                 <Link to="/login" className="text-sm font-display font-semibold text-gray-600 hover:text-navy-900 px-4 py-2 rounded-xl hover:bg-gray-100 transition-colors">
                   Sign in
                 </Link>

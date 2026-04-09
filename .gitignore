@@ -1,1 +1,7 @@
 node_modules/
+dist/
+.claude/
+server/.env
+server/node_modules/
+server/uploads/
+server/prisma/dev.db

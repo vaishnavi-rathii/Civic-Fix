@@ -2,107 +2,9 @@ import { createContext, useContext, useState, useEffect } from 'react';
 
 const AppContext = createContext(null);
 
-const SAMPLE_ISSUES = [
-  {
-    id: '1',
-    title: 'Large pothole on MG Road',
-    description: 'A dangerous pothole near the intersection causing accidents. Multiple vehicles have been damaged.',
-    category: 'pothole',
-    status: 'in-progress',
-    photo: null,
-    location: { lat: 28.6139, lng: 77.2090, address: 'MG Road, New Delhi' },
-    reportedBy: 'user1',
-    reporterName: 'Arjun Sharma',
-    upvotes: 24,
-    createdAt: new Date(Date.now() - 86400000 * 3).toISOString(),
-    updatedAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-    comments: [{ id: 'c1', text: 'This has been here for weeks!', author: 'Priya M.', createdAt: new Date(Date.now() - 86400000 * 2).toISOString() }],
-    statusHistory: [
-      { status: 'reported', note: 'Issue reported by citizen', date: new Date(Date.now() - 86400000 * 3).toISOString() },
-      { status: 'in-progress', note: 'Assigned to PWD Department', date: new Date(Date.now() - 86400000 * 1).toISOString() },
-    ],
-  },
-  {
-    id: '2',
-    title: 'Overflowing garbage bin near park',
-    description: 'The garbage bin at Lodi Garden entrance hasn\'t been cleared in 5 days. Causing foul smell.',
-    category: 'garbage',
-    status: 'reported',
-    photo: null,
-    location: { lat: 28.5931, lng: 77.2197, address: 'Lodi Garden, New Delhi' },
-    reportedBy: 'user2',
-    reporterName: 'Meera Patel',
-    upvotes: 15,
-    createdAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-    updatedAt: new Date(Date.now() - 86400000 * 1).toISOString(),
-    comments: [],
-    statusHistory: [
-      { status: 'reported', note: 'Issue reported by citizen', date: new Date(Date.now() - 86400000 * 1).toISOString() },
-    ],
-  },
-  {
-    id: '3',
-    title: 'Street light not working',
-    description: '3 consecutive street lights near Connaught Place metro exit are out, making it unsafe at night.',
-    category: 'streetlight',
-    status: 'resolved',
-    photo: null,
-    location: { lat: 28.6304, lng: 77.2177, address: 'Connaught Place, New Delhi' },
-    reportedBy: 'user3',
-    reporterName: 'Raj Kumar',
-    upvotes: 31,
-    createdAt: new Date(Date.now() - 86400000 * 7).toISOString(),
-    updatedAt: new Date(Date.now() - 86400000 * 0.5).toISOString(),
-    comments: [{ id: 'c2', text: 'Fixed! Lights are back on.', author: 'Raj K.', createdAt: new Date(Date.now() - 86400000 * 0.5).toISOString() }],
-    statusHistory: [
-      { status: 'reported', note: 'Issue reported by citizen', date: new Date(Date.now() - 86400000 * 7).toISOString() },
-      { status: 'in-progress', note: 'Electrical team dispatched', date: new Date(Date.now() - 86400000 * 2).toISOString() },
-      { status: 'resolved', note: 'All 3 lights replaced and operational', date: new Date(Date.now() - 86400000 * 0.5).toISOString() },
-    ],
-  },
-  {
-    id: '4',
-    title: 'Water pipe leakage on Janpath',
-    description: 'Burst water main has been flooding the road for 2 days. Significant water wastage.',
-    category: 'water',
-    status: 'in-progress',
-    photo: null,
-    location: { lat: 28.6200, lng: 77.2100, address: 'Janpath, New Delhi' },
-    reportedBy: 'user2',
-    reporterName: 'Meera Patel',
-    upvotes: 42,
-    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-    updatedAt: new Date(Date.now() - 86400000 * 0.2).toISOString(),
-    comments: [],
-    statusHistory: [
-      { status: 'reported', note: 'Issue reported by citizen', date: new Date(Date.now() - 86400000 * 2).toISOString() },
-      { status: 'in-progress', note: 'Delhi Jal Board team en route', date: new Date(Date.now() - 86400000 * 0.2).toISOString() },
-    ],
-  },
-  {
-    id: '5',
-    title: 'Blocked storm drain causing flooding',
-    description: 'The drain near the school is completely blocked with debris. Any rain causes flooding.',
-    category: 'drainage',
-    status: 'reported',
-    photo: null,
-    location: { lat: 28.6350, lng: 77.2250, address: 'Karol Bagh, New Delhi' },
-    reportedBy: 'user1',
-    reporterName: 'Arjun Sharma',
-    upvotes: 19,
-    createdAt: new Date(Date.now() - 86400000 * 4).toISOString(),
-    updatedAt: new Date(Date.now() - 86400000 * 4).toISOString(),
-    comments: [],
-    statusHistory: [
-      { status: 'reported', note: 'Issue reported by citizen', date: new Date(Date.now() - 86400000 * 4).toISOString() },
-    ],
-  },
-];
-
-const SAMPLE_USERS = [
-  { id: 'user1', name: 'Arjun Sharma', email: 'arjun@example.com', password: 'password', role: 'citizen', avatar: 'AS', joinedAt: '2024-01-15' },
-  { id: 'user2', name: 'Meera Patel', email: 'meera@example.com', password: 'password', role: 'citizen', avatar: 'MP', joinedAt: '2024-02-20' },
-  { id: 'admin', name: 'Admin User', email: 'admin@civicfix.in', password: 'admin123', role: 'admin', avatar: 'AU', joinedAt: '2023-12-01' },
+const DEFAULT_USERS = [
+  { id: 'user_demo_citizen', name: 'Arjun Sharma', email: 'arjun@example.com', password: 'password', role: 'citizen', avatar: 'AS', joinedAt: '2024-01-15' },
+  { id: 'user_demo_admin', name: 'Admin User', email: 'admin@civicfix.in', password: 'admin123', role: 'admin', avatar: 'AU', joinedAt: '2023-12-01' },
 ];
 
 export function AppProvider({ children }) {
@@ -112,14 +14,14 @@ export function AppProvider({ children }) {
   const [issues, setIssues] = useState(() => {
     try {
       const stored = JSON.parse(localStorage.getItem('cf_issues'));
-      return stored && stored.length > 0 ? stored : SAMPLE_ISSUES;
-    } catch { return SAMPLE_ISSUES; }
+      return stored || [];
+    } catch { return []; }
   });
   const [users, setUsers] = useState(() => {
     try {
       const stored = JSON.parse(localStorage.getItem('cf_users'));
-      return stored && stored.length > 0 ? stored : SAMPLE_USERS;
-    } catch { return SAMPLE_USERS; }
+      return stored && stored.length > 0 ? stored : DEFAULT_USERS;
+    } catch { return DEFAULT_USERS; }
   });
   const [notifications, setNotifications] = useState(() => {
     try { return JSON.parse(localStorage.getItem('cf_notifs')) || []; } catch { return []; }

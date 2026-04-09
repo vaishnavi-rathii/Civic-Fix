@@ -141,3 +141,15 @@ input[type="range"]::-webkit-slider-thumb {
 .toast {
   animation: slideUp 0.3s ease-out;
 }
+
+/* Print styles — hide nav, sidebar, buttons; show clean issue report */
+@media print {
+  body::before { display: none; }
+  nav, .print-hidden, .leaflet-control, button { display: none !important; }
+  body { background: white !important; font-family: Georgia, serif; font-size: 12pt; color: #000; }
+  .card { box-shadow: none !important; border: 1px solid #ccc !important; border-radius: 0 !important; }
+  .page-enter { animation: none; }
+  .print-timeline .animate-ping { display: none; }
+  a[href]:after { content: none; }
+  .lg\:col-span-2, .lg\:grid-cols-3 { display: block !important; }
+}
