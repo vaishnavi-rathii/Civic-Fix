@@ -114,7 +114,7 @@ export default function AIChatbot() {
                 <p className="font-display font-bold text-white text-sm">CivicFix Assistant</p>
                 <div className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-[10px] text-white/50 font-body">Powered by Claude AI</span>
+                  <span className="text-[10px] text-white/50 font-body">AI Assistant</span>
                 </div>
               </div>
             </div>

@@ -81,7 +81,7 @@ export default function Chatbot() {
                 <p className="font-display font-bold text-white text-sm">CivicBot</p>
                 <div className="flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-[10px] text-white/60 font-body">Powered by Claude</span>
+                  <span className="text-[10px] text-white/60 font-body">AI Assistant</span>
                 </div>
               </div>
             </div>

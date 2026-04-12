@@ -105,7 +105,7 @@ Date: ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', 
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <h1 className="font-display font-extrabold text-3xl text-navy-900">AI Letter Generator</h1>
-            <AIBadge text="Claude Powered" />
+            <AIBadge text="AI Powered" />
           </div>
           <p className="text-gray-500 font-body text-sm">Generate a formal complaint letter to government authorities — ready to submit in seconds.</p>
         </div>
