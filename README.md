@@ -1,6 +1,6 @@
 # CivicFix — Civic Issue Reporting Platform
 
-A civic issue reporting platform built with React 18 + Vite + Tailwind CSS. Citizens report local infrastructure problems, track their status, and engage with the community — backed by AI-powered tools.
+A civic issue reporting platform built with **React 18 + Vite + Tailwind CSS**. Citizens report local infrastructure problems, track their status, and engage with the community — backed by AI-powered tools.
 
 Built as part of the **Design Thinking and Innovation** course at Bennett University, 2025.
 
@@ -8,13 +8,15 @@ Built as part of the **Design Thinking and Innovation** course at Bennett Univer
 
 ## Tech Stack
 
-- **Frontend**: React 18, Vite, Tailwind CSS
-- **Routing**: React Router v6
-- **Maps**: Leaflet + React Leaflet + Nominatim (free, no API key)
-- **Icons**: Lucide React
-- **State / Persistence**: React Context + localStorage
-- **AI Features**: Rule-based simulator (works offline, no API key needed)
-- **Fonts**: Syne (display) + DM Sans (body) via Google Fonts
+| Layer | Technologies |
+|---|---|
+| **Frontend** | React 18, Vite, Tailwind CSS |
+| **Routing** | React Router v6 |
+| **Maps** | Leaflet + React Leaflet + Nominatim (free, no API key) |
+| **Icons** | Lucide React |
+| **State / Persistence** | React Context + localStorage |
+| **AI Features** | Rule-based simulator (works offline, no API key needed) |
+| **Fonts** | Syne (display) + DM Sans (body) via Google Fonts |
 
 ---
 
@@ -42,7 +44,7 @@ The app runs at `http://localhost:5173` by default.
 | Citizen | arjun@example.com   | password  |
 | Admin   | admin@civicfix.in   | admin123  |
 
-> Admins cannot self-register. Admin accounts are pre-seeded only.  
+> Note: Admins cannot self-register. Admin accounts are pre-seeded only.
 > Citizens register normally via the Register page.
 
 ---
@@ -63,7 +65,7 @@ The app runs at `http://localhost:5173` by default.
 ### Phase 2 — Admin & AI Insights
 
 - **Admin Dashboard** — full issue management table (search, filter, status updates with notes)
-- **AI City Health Score** — circular progress indicator, narrative, label (Poor/Fair/Good/Excellent)
+- **AI City Health Score** — circular progress indicator, narrative, label (Poor / Fair / Good / Excellent)
 - **Priority Actions** — 5-item ranked admin action list
 - **Problem Hotspots** — top 3 problem areas by issue density
 - **Sentiment Pulse** — overall citizen sentiment + frustrated complaint list + suggested response
@@ -102,4 +104,15 @@ src/
 
 ## Team
 
-Made by students of Bennett University for the DTI course, 2025.
+Made by students of **Bennett University** for the DTI course, 2025.
+
+| Name | GitHub |
+|------|--------|
+| **Shaurya Nigam** | [@shaauryaa](https://github.com/shaauryaa) |
+| **Vaishnavi Rathi** | [@vaishnavi-rathii](https://github.com/vaishnavi-rathii) |
+
+---
+
+## License
+
+This project was built for academic purposes as part of the Design Thinking and Innovation course at Bennett University.
